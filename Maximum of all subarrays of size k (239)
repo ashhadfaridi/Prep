@@ -1,0 +1,31 @@
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int i=0;
+        int j =0;
+        int max = 0 ;
+        int[] arr = new int[nums.length -k+1];
+        int p=0;
+        ArrayDeque<Integer> q= new ArrayDeque<>();
+        
+        
+        while(j<nums.length){
+            
+            while(q.size()!=0 && nums[j]> q.peekLast()) q.pollLast();
+            
+            q.addLast(nums[j]);
+            
+            
+            if(j-i+1 < k) j++;
+            
+            else if(j-i+1 ==k){
+                arr[p++] = q.peekFirst();
+                if(q.peekFirst()==nums[i]) q.pollFirst();
+                i++;
+                j++;
+                
+            }
+            
+        }
+        return arr;
+    }
+}
