@@ -1,0 +1,29 @@
+class Compute {
+    
+    public long[] printFirstNegativeInteger(long A[], int N, int K)
+    {
+        ArrayDeque<Long> q = new ArrayDeque<>();
+        int i = 0 ; 
+        int j = 0 ;
+        long[] arr = new long[A.length-K+1];
+        int p =0;
+        
+        while(j<A.length){
+            
+            if(A[j]< 0) q.addLast(A[j]);
+            
+            if(j-i+1 < K) j++;
+            
+            else if(j-i+1 == K){
+                
+                if(q.size()!=0) arr[p++] = q.peekFirst();
+                else arr[p++] = 0;
+                
+                if( q.size()!=0 && q.peekFirst()==A[i]) q.pollFirst();
+                i++;
+                j++;
+            }
+        }
+        return arr ;
+    }
+}
