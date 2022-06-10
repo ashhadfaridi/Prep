@@ -1,0 +1,23 @@
+height = max(left , rightHeight) +1 ; 
+diameter = max(max , left+right) ; 
+returning statement in maxDepth only to keep track of height  
+**
+
+class Solution {
+    int max = 0 ;
+    public int diameterOfBinaryTree(TreeNode root) {
+        maxDepth(root);
+        return max ; 
+    }
+    
+    public int maxDepth(TreeNode r){
+        
+        if(r==null) return 0;
+        
+        int left = maxDepth(r.left);
+        int right = maxDepth(r.right);
+        
+        max = Math.max(max , left + right );
+        return Math.max( left , right)+1 ; 
+    }
+}
