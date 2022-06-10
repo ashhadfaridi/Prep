@@ -1,0 +1,38 @@
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        
+        q.offer(root.left);
+        q.offer(root.right);
+        
+        while(!q.isEmpty()){
+            
+            TreeNode p = q.poll();
+            TreeNode r = q.poll();
+            
+            if(p==null && r ==null) continue ; 
+            if( p==null || r== null || p.val != r.val) return false;
+            
+            q.offer(p.left);
+            q.offer(r.right);
+            q.offer(p.right);
+            q.offer(r.left);
+        }
+        return true;
+    }
+}
+
+
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        return root==null || helper(root.left , root.right);
+    }
+    
+    public boolean helper(TreeNode p , TreeNode q){
+        
+        if(p == null || q==null) return p==q ; 
+        if(p.val !=q.val) return false ; 
+        
+        return helper(p.left , q.right ) && helper(p.right , q.left);
+    }
+}
