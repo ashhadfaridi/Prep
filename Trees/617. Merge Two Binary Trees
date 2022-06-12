@@ -1,0 +1,53 @@
+class Solution {
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+        
+        if(root1 == null && root2==null ) return null;;
+        if(root1==null) return root2;
+        if(root2 ==null) return root1 ; 
+        TreeNode t = new TreeNode(root1.val + root2.val);
+        t.left = mergeTrees(root1.left , root2.left);
+        t.right = mergeTrees(root1.right , root2.right);
+        return t ;
+        
+    }
+}
+
+//Iterative using stack 
+
+class Solution {
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+        
+        Stack<TreeNode> s = new Stack<>();
+        s.push(root1);
+        s.push(root2);
+        
+        if(root1 == null) return root2 ; 
+        
+        while(!s.isEmpty()){
+            
+            TreeNode two = s.pop();
+            TreeNode one = s.pop();
+            
+            if(one != null && two !=null ){
+                
+                one.val +=two.val;
+                
+                if(one.left == null) one.left = two.left ;
+                
+                else {
+                    s.push(one.left);
+                    s.push(two.left);
+                }
+                if(one.right ==null) one.right = two.right ; 
+                
+                else {
+                    s.push(one.right);
+                    s.push(two.right);
+                }
+            } 
+        }
+        return root1 ; 
+        
+        
+    }
+}
