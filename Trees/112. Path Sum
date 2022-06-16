@@ -1,0 +1,39 @@
+Rescursive DFS
+
+ public boolean hasPathSum(TreeNode root, int targetSum) {
+        
+        if(root ==null) return false ; 
+        
+        if(root.left == null && root.right == null ) return targetSum == root.val;
+        
+        return hasPathSum(root.left , targetSum- root.val) || hasPathSum(root.right , targetSum - root.val);
+    }
+    
+    
+Iterative BFS using stack and updating val of nodes 
+
+public boolean hasPathSum(TreeNode root, int targetSum) {
+        if(root == null) return false;
+        
+        Stack<TreeNode> stack = new Stack<>();
+        stack.add(root);
+        
+        while(stack.size() != 0)
+        {
+            TreeNode curr = stack.pop();
+            
+            if(curr.left == null && curr.right == null && curr.val == targetSum)
+                return true;
+            
+            if(curr.left != null)
+            {
+                curr.left.val = curr.val + curr.left.val;
+                stack.add(curr.left);
+            }
+            if(curr.right != null)
+            {
+                curr.right.val = curr.val + curr.right.val;
+                stack.add(curr.right);
+            }
+        } return false;
+    }
