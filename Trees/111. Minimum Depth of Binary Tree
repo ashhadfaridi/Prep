@@ -1,0 +1,37 @@
+BFS iterative. we will return k value as soo as we find that the node is a leaf node. 
+ public int minDepth(TreeNode root) {
+        if(root == null) return 0 ;
+        Queue<TreeNode> q = new LinkedList<>();
+        
+        q.offer(root);
+        int k = 1 ;
+        
+        while(!q.isEmpty()){
+            
+            int depth = q.size();
+            
+            for(int i = 0 ; i < depth ; i++){
+                if(q.peek().left == null && q.peek().right ==null) return k ; 
+                
+                if(q.peek().left != null) q.offer(q.peek().left);
+                if(q.peek().right != null) q.offer(q.peek().right);
+                q.poll();
+            }
+            k++;
+            
+        }
+        return k ; 
+    }
+DFS recursive
+
+ public int minDepth(TreeNode root) {
+        if(root == null) return  0 ; 
+       if(root.left ==null && root.right==null) return 1 ; 
+        int left =  minDepth(root.left);
+        int  right = minDepth(root.right) ;
+        if(root.left==null) return right+1;
+        
+        if(root.right == null) return left+1;
+        
+        return Math.min(left , right)+1 ; 
+    }
