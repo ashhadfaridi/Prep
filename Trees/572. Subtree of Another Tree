@@ -1,0 +1,21 @@
+//check if s and t are same if not do s.left, t or s.right , t 
+//helper for checkng s.val == t.val then s.left , t.left and s.right , t.right
+//helper also checks for null because subtree should be complete descendent of tree
+//kevin 
+
+class Solution {
+     public boolean isSubtree(TreeNode s, TreeNode t) {
+        if (s == null) return false;
+        if (isSame(s, t)) return true;
+        return isSubtree(s.left, t) || isSubtree(s.right, t);
+    }
+    
+    private boolean isSame(TreeNode s, TreeNode t) {
+        if (s == null && t == null) return true;
+        if (s == null || t == null) return false;
+        
+        if (s.val == t.val) return isSame(s.left, t.left) && isSame(s.right, t.right);;
+        
+        return false;
+    }
+}
