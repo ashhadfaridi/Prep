@@ -16,3 +16,24 @@ class Solution {
         list.add(root.val);
     }
 }
+
+//iterative use addfirst of LL first add root then get all child in a list then add first 
+
+class Solution {
+    public List<Integer> postorder(Node root) {
+        LinkedList<Integer> list = new LinkedList<Integer>();
+        if(root == null)
+            return list;
+        Stack<Node> stack = new Stack<Node>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            Node node = stack.pop();
+            List<Node> child = node.children;
+            list.addFirst(node.val);
+            for(Node no:child){
+                stack.push(no);
+            }
+        }
+        return list;
+    }
+}
