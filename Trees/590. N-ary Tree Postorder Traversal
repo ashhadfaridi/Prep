@@ -1,0 +1,18 @@
+//recursive similar to preorder just go through node first and then add (opp of preorder)
+
+class Solution {
+    List<Integer> list = new ArrayList<>();
+    public List<Integer> postorder(Node root) {
+        if(root==null) return list ; 
+        helper(root);
+        return list ; 
+    }
+    public void helper(Node root){
+        
+        if(root == null) return ;
+        for(Node child: root.children){
+            helper(child);
+        }
+        list.add(root.val);
+    }
+}
